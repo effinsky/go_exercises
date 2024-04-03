@@ -7,6 +7,7 @@ import (
 )
 
 func main() {
+
 	// Parse a stream of tokens into a run-length encoding.
 	tokens := []string{"a", "a", "a", "b", "b", "c", "c", "d", "d", "e"}
 	rle_pairs := exercises.RLE_iter(tokens)

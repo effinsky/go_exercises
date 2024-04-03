@@ -32,12 +32,15 @@ func RLE_iter[A comparable](in []A) []Pair[A] {
 }
 
 func RLE_rec[A comparable](in []A) []Pair[A] {
+	if len(in) == 0 {
+		return []Pair[A]{}
+	}
 	return rle_aux(in, 0, make([]Pair[A], 0, len(in)))
 }
 
 func rle_aux[A comparable](in []A, count int, acc []Pair[A]) []Pair[A] {
 	if len(in) == 0 {
-		return []Pair[A]{}
+		return acc
 	}
 	if len(in) == 1 {
 		it := in[0]
@@ -47,7 +50,7 @@ func rle_aux[A comparable](in []A, count int, acc []Pair[A]) []Pair[A] {
 		})
 		return acc
 	}
-	// len > 1
+	// below len is > 1
 	curr := in[0]
 	next := in[1]
 	// include next in the tail, we take it out only for comparison with curr
