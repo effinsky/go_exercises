@@ -32,4 +32,6 @@ func main() {
 	from, to := 2, 5
 	sliced := ex.SliceWithin(slice_src, from, to)
 	fmt.Printf("sliced: %v\n", sliced)
+	sliced = ex.SliceWithinIterative(slice_src, from, to) // impl super trivial
+	fmt.Printf("sliced: %v\n", sliced)
 }
