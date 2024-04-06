@@ -1,5 +1,22 @@
 package exercises
 
+// SliceWithinIterative here creates a new list in memory, though the elements,
+// if they are reference types, are not cloned, but shared. We can go all sorts
+// of ways with this. Iterative is pretty trivial here compared to the
+// functional aproach below. If we wanted full immutability, we'd have to do
+// deep cloning on all the values in the input list. and that would not be so
+// trivial anymore.. and we cannot really otherwise guarantee immutability of
+// values of custom types within the language..
+func SliceWithinIterative[A any](in []A, from, to int) []A {
+	// not using Go slice syntax on purpose here
+	out := make([]A, 0, to-from+1)
+	for i := from; i <= to; i++ {
+		out = append(out, in[i])
+	}
+	return out
+}
+
+// bonus twisted functional-style impl
 func SliceWithin[A any](in []A, i, j int) []A {
 	if len(in) == 0 {
 		return []A{}
@@ -38,19 +55,4 @@ func foldUntil[A any, B any](
 	t := list[1:]
 	acc = f(acc, h)
 	return foldUntil(f, acc, n-1, t)
-}
-
-// SliceWithinIterative here creates a new list in memory, though the elements,
-// if they are reference types, are not cloned, but shared. We can go all sorts
-// of ways with this. Iterative is pretty trivial here compared to the
-// functional aproach above. If we wanted full immutability, we'd have to do
-// deep cloning on all the values in the input list. and that would not be so
-// trivial anymore..
-func SliceWithinIterative[A any](in []A, from, to int) []A {
-	// not using Go slice syntax on purpose here
-	out := make([]A, 0, to-from+1)
-	for i := from; i <= to; i++ {
-		out = append(out, in[i])
-	}
-	return out
 }
