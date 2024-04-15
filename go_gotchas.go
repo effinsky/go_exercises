@@ -31,3 +31,9 @@ package main
 
 // thread levels for actual parallelism:
 // hardware thread -> os thread -> goroutine
+
+// opportunities for go scheduler context switching among goroutines :
+// go keyword used; GC happening; syscalls; clocking calls in the program (mutexes etc)
+
+// manage data races with : atomics for simple values like counters; mutexes for more
+// complex data. consider rwmutex when necessary

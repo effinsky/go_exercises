@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 
+	"ex/exercises"
 	ex "ex/exercises"
 )
 
@@ -46,4 +47,8 @@ func main() {
 
 	rotated_left := ex.RotateLeft(to_rotate, places)
 	fmt.Printf("rotated left : %v\n", rotated_left)
+
+	// Lotto: Draw N Different Random Numbers From the Set 1..M.
+	lotto_numbers := exercises.EasyLotto(6, 20)
+	fmt.Printf("lotto_numbers: %v\n", lotto_numbers)
 }
