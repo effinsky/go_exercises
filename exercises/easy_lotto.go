@@ -6,23 +6,21 @@ import (
 
 // Lotto: Draw N Different Random Numbers From the Set 1..M.
 func EasyLotto(n, high int) []int {
-	// definitely not the most efficient. but not too bad either!
-	return shuffle(1, high)[:n]
+	return shuffle_with_interrupt(1, high, n)
 }
 
 // using Durstenfeld's version of the Fisher-Yates shuffle.
-func shuffle(low, high int) []int {
-	rng := make([]int, 0, high-low+1)
-
-	for i := low; i <= high; i++ {
-		rng = append(rng, i)
+func shuffle_with_interrupt(low, high, n int) []int {
+	// generate a range of ints of low all the way to high
+	rng := make([]int, high-low+1)
+	for i := range rng {
+		rng[i] = low + i
 	}
-
-	for i := low; i < high; i++ {
-		new_idx := rand.Intn(high - low)
-		last_untouched_idx := high - i
-		rng[new_idx], rng[last_untouched_idx] = rng[last_untouched_idx], rng[new_idx]
+	// interrupt shuffling when we have n random ints..
+	for i := low; i <= high && i < n; i++ {
+		newIdx := rand.Intn(high-low+1) + low
+		rng[i-low], rng[newIdx-low] = rng[newIdx-low], rng[i-low]
 	}
-
-	return rng
+	// and return a slice of that size from the range
+	return rng[:n]
 }

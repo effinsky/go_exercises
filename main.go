@@ -49,6 +49,6 @@ func main() {
 	fmt.Printf("rotated left : %v\n", rotated_left)
 
 	// Lotto: Draw N Different Random Numbers From the Set 1..M.
-	lotto_numbers := exercises.EasyLotto(6, 20)
+	lotto_numbers := exercises.EasyLotto(6, 50)
 	fmt.Printf("lotto_numbers: %v\n", lotto_numbers)
 }
