@@ -51,4 +51,28 @@ func main() {
 	// Lotto: Draw N Different Random Numbers From the Set 1..M.
 	lotto_numbers := exercises.EasyLotto(6, 50)
 	fmt.Printf("lotto_numbers: %v\n", lotto_numbers)
+
+	var s Str = "nothingness"
+	fmt.Printf("s.Len(): %v\n", s.Len())
+
+	// s = s.Push('e')
+	// s = s.Push('s')
+	s.PushMut('e')
+	s.PushMut('s')
+
+	fmt.Printf("s: %v\n", s)
+}
+
+type Str string
+
+func (s Str) Len() int { return len(s) }
+
+// returns a new Str
+func (s Str) Push(ch rune) Str {
+	return Str(fmt.Sprintf("%s%s", s, string(ch)))
+}
+
+// mutates Str
+func (s *Str) PushMut(ch rune) {
+	*s = Str(fmt.Sprintf("%s%s", *s, string(ch)))
 }
