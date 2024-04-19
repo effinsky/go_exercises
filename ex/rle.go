@@ -1,4 +1,4 @@
-package exercises
+package ex
 
 type Pair[A comparable] struct {
 	Item  A

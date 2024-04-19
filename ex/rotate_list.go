@@ -1,4 +1,4 @@
-package exercises
+package ex
 
 func RotateRight[A any](in []A, n int) []A {
 	o := getOffset(in, n)

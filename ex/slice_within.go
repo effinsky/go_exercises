@@ -1,4 +1,4 @@
-package exercises
+package ex
 
 // SliceWithinIterative here creates a new list in memory, though the elements,
 // if they are reference types, are not cloned, but shared. We can go all sorts

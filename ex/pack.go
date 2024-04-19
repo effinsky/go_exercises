@@ -1,4 +1,4 @@
-package exercises
+package ex
 
 type Subl[A any] []A
 

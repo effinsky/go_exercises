@@ -1,4 +1,4 @@
-module ex
+module various
 
 go 1.22
 
