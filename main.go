@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 
+	ds "various/data_structures"
 	"various/ex"
 )
 
@@ -12,14 +13,19 @@ func main() {
 	rle_pairs := ex.RLE_iter(tokens)
 	fmt.Printf("pairs: %v\n", rle_pairs)
 
+	fmt.Printf("--------------------------------------------------------------\n")
+
 	// RLE with functional-like impl
 	rle_pairs = ex.RLE_rec(tokens)
 	fmt.Printf("pairs: %v\n", rle_pairs)
+
+	fmt.Printf("--------------------------------------------------------------\n")
 
 	// Pack consecutive duplicates of list elements into sublists.
 	packed := ex.Pack([]int{1, 1, 1, 2, 3, 3, 3, 4, 4, 4, 5})
 	fmt.Printf("packed: %v\n", packed)
 
+	fmt.Printf("--------------------------------------------------------------\n")
 	// Slice within.
 	slice_src := []string{
 		"nothing",
@@ -36,6 +42,8 @@ func main() {
 	sliced = ex.SliceWithinIterative(slice_src, from, to) // impl super trivial
 	fmt.Printf("sliced: %v\n", sliced)
 
+	fmt.Printf("--------------------------------------------------------------\n")
+
 	// Rotate slice(list) right and left.
 	to_rotate := []string{"a", "b", "c", "d", "e", "f", "g"}
 	places := 3
@@ -51,27 +59,22 @@ func main() {
 	lotto_numbers := ex.EasyLotto(6, 50)
 	fmt.Printf("lotto_numbers: %v\n", lotto_numbers)
 
-	var s Str = "nothingness"
-	fmt.Printf("s.Len(): %v\n", s.Len())
+	fmt.Printf("--------------------------------------------------------------\n")
 
-	// s = s.Push('e')
-	// s = s.Push('s')
-	s.PushMut('e')
-	s.PushMut('s')
+	// Binary search tree
+	bst := ds.NewBST("alpha")
+	bst.Insert("beta")
+	bst.Insert("gamma")
+	bst.Insert("delta")
 
-	fmt.Printf("s: %v\n", s)
-}
+	bst.TraversePreOrder()
 
-type Str string
-
-func (s Str) Len() int { return len(s) }
-
-// returns a new Str
-func (s Str) Push(ch rune) Str {
-	return Str(fmt.Sprintf("%s%s", s, string(ch)))
-}
-
-// mutates Str
-func (s *Str) PushMut(ch rune) {
-	*s = Str(fmt.Sprintf("%s%s", *s, string(ch)))
+	// Take another look at deletion..
+	toDelete := "gamma"
+	if ok := bst.Delete(toDelete); ok {
+		fmt.Printf("tree traversal following %q deletion\n", toDelete)
+	} else {
+		fmt.Printf("Could not delete %q from tree\n", toDelete)
+	}
+	bst.TraversePreOrder()
 }
