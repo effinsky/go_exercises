@@ -15,6 +15,9 @@ import (
 // arises in cases where the data is changing. If we are doing many searches
 // over a dynamic data set, this combination of efficiencies (of dealing with
 // a sorted array) becomes critical.
+
+// The BST is considered to be balanced when its left and right subtrees differ
+// by at most one level.
 type (
 	BST[I item] struct{ Root *node[I] }
 
@@ -205,3 +208,5 @@ func findSuccessor[I item](curr *node[I]) *node[I] {
 	}
 	return s
 }
+
+// write bulk insertion?

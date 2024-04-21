@@ -63,9 +63,9 @@ func main() {
 
 	// Binary search tree
 	bst := ds.NewBST("alpha")
-	bst.Insert("beta")
-	bst.Insert("gamma")
 	bst.Insert("delta")
+	bst.Insert("gamma")
+	bst.Insert("beta")
 
 	bst.TraversePreOrder()
 
