@@ -10,14 +10,14 @@ import (
 func main() {
 	// Parse a stream of tokens into a run-length encoding.
 	tokens := []string{"a", "a", "a", "b", "b", "c", "c", "d", "d", "e"}
-	rle_pairs := ex.RLE_iter(tokens)
-	fmt.Printf("pairs: %v\n", rle_pairs)
+	rlePairs := ex.RLE_iter(tokens)
+	fmt.Printf("pairs: %v\n", rlePairs)
 
 	fmt.Printf("--------------------------------------------------------------\n")
 
 	// RLE with functional-like impl
-	rle_pairs = ex.RLE_rec(tokens)
-	fmt.Printf("pairs: %v\n", rle_pairs)
+	rlePairs = ex.RLErec(tokens)
+	fmt.Printf("pairs: %v\n", rlePairs)
 
 	fmt.Printf("--------------------------------------------------------------\n")
 
@@ -27,7 +27,7 @@ func main() {
 
 	fmt.Printf("--------------------------------------------------------------\n")
 	// Slice within.
-	slice_src := []string{
+	sliceSrc := []string{
 		"nothing",
 		"something",
 		"anything",
@@ -37,27 +37,27 @@ func main() {
 		"anything_again",
 	}
 	from, to := 2, 5
-	sliced := ex.SliceWithin(slice_src, from, to)
+	sliced := ex.SliceWithin(sliceSrc, from, to)
 	fmt.Printf("sliced: %v\n", sliced)
-	sliced = ex.SliceWithinIterative(slice_src, from, to) // impl super trivial
+	sliced = ex.SliceWithinIterative(sliceSrc, from, to) // impl super trivial
 	fmt.Printf("sliced: %v\n", sliced)
 
 	fmt.Printf("--------------------------------------------------------------\n")
 
 	// Rotate slice(list) right and left.
-	to_rotate := []string{"a", "b", "c", "d", "e", "f", "g"}
+	toRotate := []string{"a", "b", "c", "d", "e", "f", "g"}
 	places := 3
-	fmt.Printf("to_rotate by %d places: %v\n", places, to_rotate)
+	fmt.Printf("to_rotate by %d places: %v\n", places, toRotate)
 
-	rotated_right := ex.RotateRight(to_rotate, places)
-	fmt.Printf("rotated right : %v\n", rotated_right)
+	rotatedRight := ex.RotateRight(toRotate, places)
+	fmt.Printf("rotated right : %v\n", rotatedRight)
 
-	rotated_left := ex.RotateLeft(to_rotate, places)
-	fmt.Printf("rotated left : %v\n", rotated_left)
+	rotatedLeft := ex.RotateLeft(toRotate, places)
+	fmt.Printf("rotated left : %v\n", rotatedLeft)
 
 	// Lotto: Draw N Different Random Numbers From the Set 1..M.
-	lotto_numbers := ex.EasyLotto(6, 50)
-	fmt.Printf("lotto_numbers: %v\n", lotto_numbers)
+	lottoNumbers := ex.EasyLotto(6, 50)
+	fmt.Printf("lotto_numbers: %v\n", lottoNumbers)
 
 	fmt.Printf("--------------------------------------------------------------\n")
 

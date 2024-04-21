@@ -31,7 +31,7 @@ func RLE_iter[A comparable](in []A) []Pair[A] {
 	return out
 }
 
-func RLE_rec[A comparable](in []A) []Pair[A] {
+func RLErec[A comparable](in []A) []Pair[A] {
 	if len(in) == 0 {
 		return []Pair[A]{}
 	}

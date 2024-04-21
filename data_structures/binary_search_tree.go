@@ -15,33 +15,33 @@ import (
 // arises in cases where the data is changing. If we are doing many searches
 // over a dynamic data set, this combination of efficiencies (of dealing with
 // a sorted array) becomes critical.
-type BST[I item] struct {
-	Root *Node[I]
-}
-type item interface{ constraints.Ordered }
+type (
+	BST[I item] struct{ Root *node[I] }
+
+	item interface{ constraints.Ordered }
+
+	node[I item] struct {
+		v  I        // value
+		p  *node[I] // parent
+		lc *node[I] // left child
+		rc *node[I] // right child
+		// consider storing aux data, for instance counter for duplicate items if
+		// such occur
+	}
+)
 
 func NewBST[I item](v I) BST[I] {
 	return BST[I]{
-		Root: &Node[I]{v: v},
+		Root: &node[I]{v: v},
 	}
 }
 
-// rename to BTNode later..
-type Node[I item] struct {
-	v  I        // value
-	p  *Node[I] // parent
-	lc *Node[I] // left child
-	rc *Node[I] // right child
-	// consider storing aux data, for instance counter for duplicate items if
-	// such occur
-}
-
-func (t *BST[I]) FindValue(tgt I) *Node[I] {
+func (t *BST[I]) FindValue(tgt I) *node[I] {
 	return findValueAux(t.Root, tgt)
 }
 
 // params: current, target
-func findValueAux[I item](curr *Node[I], tgt I) *Node[I] {
+func findValueAux[I item](curr *node[I], tgt I) *node[I] {
 	fmt.Printf("curr: %+v\n", curr)
 	if curr == nil {
 		return nil
@@ -61,14 +61,14 @@ func findValueAux[I item](curr *Node[I], tgt I) *Node[I] {
 // params: value to be inserted
 func (t *BST[I]) Insert(v I) {
 	if t.Root == nil {
-		t.Root = &Node[I]{v: v}
+		t.Root = &node[I]{v: v}
 	} else {
 		insertAux(t.Root, v)
 	}
 }
 
 // params: ptr to current node, value to be inserted
-func insertAux[I item](curr *Node[I], v I) {
+func insertAux[I item](curr *node[I], v I) {
 	switch {
 	case v == curr.v:
 		fmt.Printf("node with value %v already in tree", v)
@@ -78,7 +78,7 @@ func insertAux[I item](curr *Node[I], v I) {
 		if curr.lc != nil {
 			insertAux(curr.lc, v)
 		} else {
-			curr.lc = &Node[I]{v: v}
+			curr.lc = &node[I]{v: v}
 			curr.lc.p = curr
 		}
 
@@ -86,7 +86,7 @@ func insertAux[I item](curr *Node[I], v I) {
 		if curr.rc != nil {
 			insertAux(curr.rc, v)
 		} else {
-			curr.rc = &Node[I]{v: v}
+			curr.rc = &node[I]{v: v}
 			curr.rc.p = curr
 		}
 	}
@@ -98,7 +98,7 @@ func (t *BST[I]) TraversePreOrder() {
 }
 
 // params: ptr to current node
-func traversePreorderAux[I item](curr *Node[I]) {
+func traversePreorderAux[I item](curr *node[I]) {
 	if curr == nil {
 		return
 	}
@@ -138,7 +138,7 @@ func (t *BST[I]) Delete(v I) bool {
 	return true
 }
 
-func (t *BST[I]) deleteLeafNode(curr *Node[I]) {
+func (t *BST[I]) deleteLeafNode(curr *node[I]) {
 	if curr.p == nil { // you gotta have a parent, no?
 		t.Root = nil
 	} else if curr.p.lc == curr {
@@ -148,7 +148,7 @@ func (t *BST[I]) deleteLeafNode(curr *Node[I]) {
 	}
 }
 
-func (t *BST[I]) deleteWithOneChild(curr *Node[I]) {
+func (t *BST[I]) deleteWithOneChild(curr *node[I]) {
 	child := curr.lc
 	if curr.rc != nil {
 		child = curr.rc
@@ -168,7 +168,7 @@ func (t *BST[I]) deleteWithOneChild(curr *Node[I]) {
 	}
 }
 
-func (t *BST[I]) deleteWithTwoChildren(curr *Node[I]) {
+func (t *BST[I]) deleteWithTwoChildren(curr *node[I]) {
 	succ := findSuccessor(curr)
 
 	if succ.p != curr {
@@ -198,7 +198,7 @@ func (t *BST[I]) deleteWithTwoChildren(curr *Node[I]) {
 }
 
 // Make the leftmost node in the right subtree of the deleted node the successor,
-func findSuccessor[I item](curr *Node[I]) *Node[I] {
+func findSuccessor[I item](curr *node[I]) *node[I] {
 	s := curr.rc      // go right
 	for s.lc != nil { // keep going left until you've found a leaf..
 		s = s.lc
