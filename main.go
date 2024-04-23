@@ -20,7 +20,6 @@ func main() {
 	fmt.Printf("pairs: %v\n", rlePairs)
 
 	fmt.Printf("--------------------------------------------------------------\n")
-
 	// Pack consecutive duplicates of list elements into sublists.
 	packed := ex.Pack([]int{1, 1, 1, 2, 3, 3, 3, 4, 4, 4, 5})
 	fmt.Printf("packed: %v\n", packed)
@@ -63,6 +62,13 @@ func main() {
 
 	// Binary search tree
 	bst := ds.NewBST("alpha")
+
+	sortedInsertSource := []string{"beta", "gamma", "delta"}
+	// This bulk insertion using a binary recursion algo is to ensure the tree
+	// is balanced. But it assumes the input is sorted. If it is not, it will
+	// run, but the resulting tree will not be balanced as intended.
+	bst.InsertFromSorted(sortedInsertSource)
+
 	bst.Insert("delta")
 	bst.Insert("gamma")
 	bst.Insert("beta")
@@ -70,11 +76,11 @@ func main() {
 	bst.TraversePreOrder()
 
 	// Take another look at deletion..
-	toDelete := "gamma"
-	if ok := bst.Delete(toDelete); ok {
-		fmt.Printf("tree traversal following %q deletion\n", toDelete)
-	} else {
-		fmt.Printf("Could not delete %q from tree\n", toDelete)
-	}
-	bst.TraversePreOrder()
+	// toDelete := "gamma"
+	// if ok := bst.Delete(toDelete); ok {
+	// 	fmt.Printf("tree traversal following %q deletion\n", toDelete)
+	// } else {
+	// 	fmt.Printf("Could not delete %q from tree\n", toDelete)
+	// }
+	// bst.TraversePreOrder()
 }

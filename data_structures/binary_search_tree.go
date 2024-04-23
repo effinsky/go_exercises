@@ -74,7 +74,7 @@ func (t *BST[I]) Insert(v I) {
 func insertAux[I item](curr *node[I], v I) {
 	switch {
 	case v == curr.v:
-		fmt.Printf("node with value %v already in tree", v)
+		fmt.Printf("node with value %v already in tree\n", v)
 		return
 
 	case v < curr.v:
@@ -209,4 +209,23 @@ func findSuccessor[I item](curr *node[I]) *node[I] {
 	return s
 }
 
-// write bulk insertion?
+func (t *BST[I]) InsertFromSorted(in []I) {
+	if len(in) == 0 {
+		return
+	}
+
+	t.insertFromSortedAux(in)
+}
+
+func (t *BST[I]) insertFromSortedAux(in []I) {
+	if len(in) == 1 {
+		t.Insert(in[0])
+		return
+	}
+
+	mid := len(in) / 2
+	t.Insert(in[mid])
+
+	t.insertFromSortedAux(in[:mid])
+	t.insertFromSortedAux(in[mid+1:])
+}
