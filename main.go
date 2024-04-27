@@ -76,11 +76,11 @@ func main() {
 	bst.TraversePreOrder()
 
 	// Take another look at deletion..
-	// toDelete := "gamma"
-	// if ok := bst.Delete(toDelete); ok {
-	// 	fmt.Printf("tree traversal following %q deletion\n", toDelete)
-	// } else {
-	// 	fmt.Printf("Could not delete %q from tree\n", toDelete)
-	// }
-	// bst.TraversePreOrder()
+	toDelete := "gamma"
+	if ok := bst.Delete(toDelete); ok {
+		fmt.Printf("tree traversal following %q deletion\n", toDelete)
+	} else {
+		fmt.Printf("Could not delete %q from tree\n", toDelete)
+	}
+	bst.TraversePreOrder()
 }
