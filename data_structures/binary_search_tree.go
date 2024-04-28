@@ -46,19 +46,16 @@ func (t *BST[I]) FindValue(tgt I) *node[I] {
 // params: current, target
 func findValueAux[I item](curr *node[I], tgt I) *node[I] {
 	fmt.Printf("curr: %+v\n", curr)
-	if curr == nil {
+	switch {
+	case curr == nil:
 		return nil
-	}
-	if curr.v == tgt {
+	case curr.v == tgt:
 		return curr
-	}
-	if curr.v < tgt {
+	case curr.v < tgt:
 		return findValueAux(curr.lc, tgt)
-	}
-	if curr.v > tgt { // simplify?
+	default: // case curr.v > tgt..
 		return findValueAux(curr.rc, tgt)
 	}
-	return nil
 }
 
 // params: value to be inserted
