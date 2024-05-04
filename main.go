@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 
 	ds "various/data_structures"
@@ -83,4 +84,16 @@ func main() {
 		fmt.Printf("Could not delete %q from tree\n", toDelete)
 	}
 	bst.TraversePreOrder()
+
+	src := "abcdef"
+	fmt.Printf("bytes: %v\n", src)
+	bts := []byte(src)
+	upperedBts := bytes.ToUpper(bts)
+	fmt.Printf("upperedBts: %v\n", string(upperedBts))
+
+	chunks := ex.Chunk[string](
+		[]string{"aa", "ab", "ac", "ba", "bb", "bc", "ca", "cb", "cc"},
+		3,
+	)
+	fmt.Printf("chunks: %+v\n", chunks)
 }
