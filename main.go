@@ -1,11 +1,11 @@
 package main
 
 import (
-	"bytes"
 	"fmt"
 
 	ds "various/data_structures"
 	"various/ex"
+	"various/ex/iter"
 )
 
 func main() {
@@ -85,15 +85,20 @@ func main() {
 	}
 	bst.TraversePreOrder()
 
-	src := "abcdef"
-	fmt.Printf("bytes: %v\n", src)
-	bts := []byte(src)
-	upperedBts := bytes.ToUpper(bts)
-	fmt.Printf("upperedBts: %v\n", string(upperedBts))
+	fmt.Printf("--------------------------------------------------------------\n")
 
 	chunks := ex.Chunk[string](
 		[]string{"aa", "ab", "ac", "ba", "bb", "bc", "ca", "cb", "cc"},
 		3,
 	)
 	fmt.Printf("chunks: %+v\n", chunks)
+
+	fmt.Printf("function iterators--------------------------------------------\n")
+
+	wordsOfWisdom := []string{"hello", "world", "you", "suck", "so", "bad"}
+	onlyEven := func(idx int) bool { return idx%2 == 0 }
+
+	for i, x := range iter.PickOnCond(wordsOfWisdom, onlyEven) {
+		fmt.Println(i, x)
+	}
 }
